@@ -11,3 +11,9 @@ Bu proje, kullanıcıların görevlerini web sitesi üzerinden görüntüleyip y
 ## Çalıştırma
 index.html dosyasını bir tarayıcıda aç.
 Menü bağlantılarıyla diğer sayfalara geç.
+
+## Mevcut durum
+Sayfadaki mevcut görevler örnek olarak eklenmiştir ve form henüz görev kaydetmemiştir.
+
+## Kontrol
+Sayfa bağlantılarını ve formun zorunlu alan uyarılarını dene.
