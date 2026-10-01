@@ -14,10 +14,13 @@
     <h1>Görev Ekle</h1><hr>
     <p>Bu form bir HTML alıştırmasıdır; görev kaydetmez.</p>
     <form action="gorev-ekle.html" method="get">
-        <label for="gorev-basligi">Görev Başlığı: <input id="gorev-basligi" tabindex="2" required type="text" minlength="3" maxlength="80"></label><br><br>
-        <label for="aciklama">Açıklama: <textarea id="aciklama" tabindex="4" maxlength="300"></textarea><br><br>
+        <label for="gorev-basligi">Görev Başlığı: <input id="gorev-basligi" tabindex="2" required type="text" minlength="3" maxlength="80" aria-describedby="baslik-detay"></label>
+        <small id="baslik-detay">3-80 karakter kullan. Görevi kısa ve anlaşılır biçimde adlandır.</small><br><br>
+        <label for="aciklama">Açıklama: <textarea id="aciklama" tabindex="4" maxlength="300" aria-describedby="aciklama-detay"></textarea>
+        <small id="aciklama-detay">İsteğe bağlıdır. En fazla 300 karakter yazabilirsin.</small><br><br>
         <label for="oncelik">Öncelik: <select id="oncelik" tabindex="1" required><option value="">Öncelik Seçiniz</option><option value="düsük">Düşük</option><option value="orta">Orta</option><option value="yuksek">Yüksek</option></select><br><br>
-        <label for="tarih">Hedef Tarih: <input id="tarih" tabindex="3" type="date"></label><br><br>
+        <label for="tarih">Hedef Tarih: <input id="tarih" tabindex="3" type="date" aria-describedby="tarih-detay"></label>
+        <small id="tarih-detay">İsteğe bağlıdır. Görevi tamamlamayı planladığın tarihi seç.</small><br><br>
         <label for="kategori">Kategori: <select id="kategori"><option value="">Kategori Seçiniz</option><option value="ogrenme">Öğrenme</option><option value="uygulama">Uygulama</option><option value="toplantı">Toplantı</option></select></label>
         <button tabindex="-1" type="submit">Formu Kontrol Et</button>
         <button type="reset">Formu Sıfırla</button>

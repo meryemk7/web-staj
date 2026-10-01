@@ -14,6 +14,7 @@ Menü bağlantılarıyla diğer sayfalara geç.
 
 ## Mevcut durum
 Sayfadaki mevcut görevler örnek olarak eklenmiştir ve form henüz görev kaydetmemiştir.
+Form alanlarına kullanım notları eklenmiştir.
 
 ## Kontrol
 Sayfa bağlantılarını ve formun zorunlu alan uyarılarını dene.
