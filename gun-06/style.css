@@ -1,0 +1,30 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: azure;
+}
+h1 {
+    font-size: 1.75rem; font-weight: 700;
+}
+h2 {
+    font-size: 1.25rem; font-weight: 600;
+}
+.liste {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+}
+a {
+    margin-left: 10px;
+}
+.gorev-form {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
