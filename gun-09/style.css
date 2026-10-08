@@ -1,0 +1,149 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: azure;
+}
+h1 {
+    font-size: 1.75rem; font-weight: 700;
+}
+h2 {
+    font-size: 1.25rem; font-weight: 600;
+}
+.kart {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+}
+a {
+    margin-left: 12px;
+}
+.gorev-form {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+    max-width: 480px;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+button {
+    cursor: pointer;
+}
+select {
+    cursor: pointer;
+}
+#tarih {
+    cursor: pointer;
+}
+.gorev-listesi {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .gorev-listesi { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .gorev-listesi { grid-template-columns: repeat(3, 1fr); }
+}
+.kart-icerik {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.form-alani{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+label{
+    font-weight: 600;
+    color: #111827;
+}
+small{
+    color: #4b5563;
+}
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  font: inherit;
+  color: #111827;
+  background-color: #ffffff;
+  border: 2px solid #6b7280;
+  border-radius: 4px;
+}
+textarea {
+    min-height: 96px; resize: vertical; 
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+nav a:focus-visible { 
+    outline-color: #2563eb; 
+}
+.form-butonlar {
+    display: flex; flex-wrap: wrap; gap: 12px; 
+}
+.btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-birincil { background-color: #1e3a5f; color: #ffffff; }
+.btn-birincil:hover { background-color: #2b5282; }
+
+.btn-ikincil { background-color: #ffffff; color: #1e3a5f; border-color: #1e3a5f; }
+.btn-ikincil:hover { background-color: #eff6ff; }
+
+.btn:active { transform: translateY(1px); }
+
+.btn:disabled {
+  background-color: #e5e7eb;
+  color: #6b7280;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.hata-mesaji { color: #b91c1c; font-weight: 600; }
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: #b91c1c;
+}
+
+input:user-invalid,
+textarea:user-invalid,
+select:user-invalid {
+  border-color: #b91c1c;
+}
