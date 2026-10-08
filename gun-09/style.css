@@ -56,7 +56,7 @@ select {
   min-width: 0;
   overflow-wrap: anywhere;
 }
-.form-alani{
+.alan{
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -134,7 +134,7 @@ select:disabled {
   cursor: not-allowed;
 }
 
-.hata-mesaji { color: #b91c1c; font-weight: 600; }
+.hata-mesaji { display: none; color: #b91c1c; font-weight: 600; }
 
 input[aria-invalid="true"],
 textarea[aria-invalid="true"],
@@ -146,4 +146,7 @@ input:user-invalid,
 textarea:user-invalid,
 select:user-invalid {
   border-color: #b91c1c;
+}
+.alan:has(:user-invalid) .hata-mesaji {
+  display: block;
 }

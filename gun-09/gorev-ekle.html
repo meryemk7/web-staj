@@ -15,21 +15,18 @@
     <h1>Görev Ekle</h1><hr>
     <p>Bu form bir HTML alıştırmasıdır; görev kaydetmez.</p>
     <form action="gorev-ekle.html" method="get" class="gorev-form">
-        <p class="form-alani">
+        <div class="alan">
         <label for="gorev-basligi">Görev Başlığı: <input id="gorev-basligi" required type="text" minlength="3" maxlength="80" aria-describedby="baslik-yardim baslik-hata"></label>
-        <br>
-        <small id="baslik-yardim">3-80 karakter kullan. Görevi kısa ve anlaşılır biçimde adlandır.</small>
-        <small id="baslik-hata" class="hata-mesaji">Hata: Başlık en az 3 karakter olmalı.</small><br><br></p>
-        <p class="form-alani">
+            <small id="baslik-yardim">3-80 karakter kullan. Görevi kısa ve anlaşılır biçimde adlandır.</small>
+            <small id="baslik-hata" class="hata-mesaji">Hata: Başlık en az 3 karakter olmalı.</small>
+        </div>
         <label for="aciklama">Açıklama: <textarea id="aciklama" maxlength="300" aria-describedby="aciklama-detay"></textarea>
-        <br>
-        <small id="aciklama-yardim">İsteğe bağlıdır. En fazla 300 karakter yazabilirsin.</small><br><br></p>
-        <label for="oncelik">Öncelik: <select id="oncelik" required><option value="">Öncelik Seçiniz</option><option value="düsük">Düşük</option><option value="orta">Orta</option><option value="yuksek">Yüksek</option></select><br><br>
+        <small id="aciklama-yardim">İsteğe bağlıdır. En fazla 300 karakter yazabilirsin.</small></p>
+        <div class="alan"><label for="oncelik">Öncelik: <select id="oncelik" required aria-describedby="oncelik-hata"><option value="">Öncelik Seçiniz</option><option value="düsük">Düşük</option><option value="orta">Orta</option><option value="yuksek">Yüksek</option></select>
         <small id="oncelik-hata" class="hata-mesaji">Hata: Öcelik seçmek zorunludur.</small>
-        <p class="form-alani">
+        </div>
         <label for="tarih">Hedef Tarih: <input id="tarih" type="date" aria-describedby="tarih-detay"></label>
-        <br>
-        <small id="tarih-yardim">İsteğe bağlıdır. Görevi tamamlamayı planladığın tarihi seç.</small><br><br></p>
+        <small id="tarih-yardim">İsteğe bağlıdır. Görevi tamamlamayı planladığın tarihi seç.</small><br><br>
         <label for="kategori">Kategori: <select id="kategori"><option value="">Kategori Seçiniz</option><option value="ogrenme">Öğrenme</option><option value="uygulama">Uygulama</option><option value="toplantı">Toplantı</option></select></label>
         <div class="form-butonlar">
         <button type="submit" class="btn btn-birincil">Görevi Kaydet</button>
