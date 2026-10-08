@@ -1,0 +1,57 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: azure;
+}
+h1 {
+    font-size: 1.75rem; font-weight: 700;
+}
+h2 {
+    font-size: 1.25rem; font-weight: 600;
+}
+.kart {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+}
+a {
+    margin-left: 12px;
+}
+.gorev-form {
+    background-color: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+button {
+    cursor: pointer;
+}
+select {
+    cursor: pointer;
+}
+#tarih {
+    cursor: pointer;
+}
+.gorev-listesi {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .gorev-listesi { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .gorev-listesi { grid-template-columns: repeat(3, 1fr); }
+}
+.kart-icerik {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
