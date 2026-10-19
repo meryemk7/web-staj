@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Görevlerim</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+  <a href="index.html">Tanıtım</a>
+  <a href="gorevler.html">Görevler</a>
+  <a href="gorev-ekle.html">Görev Ekle</a>
+</nav>
+  <h1>Görevlerim</h1><hr>
+  <p id="ozet"></p>
+
+  <button onclick="listeyiGoster('hepsi')">Hepsi</button>
+  <button onclick="listeyiGoster('yüksek')">Yüksek</button>
+  <button onclick="listeyiGoster('orta')">Orta</button>
+  <button onclick="listeyiGoster('düşük')">Düşük</button>
+
+  <ul id="gorevListesi"></ul>
+  <a href="gorev-ekle.html">+ Yeni görev ekle</a>
+
+  <script src="ortak.js"></script>
+  <script>
+    let seciliFiltre = "hepsi";
+
+    function ozetiGoster() {
+      const gorevler = gorevleriGetir();
+      let tamamlanan = 0;
+
+      for (const gorev of gorevler) {
+        if (gorev.tamamlandi) {
+          tamamlanan++;
+        }
+      }
+
+      const bekleyen = gorevler.length - tamamlanan;
+      document.getElementById("ozet").textContent =
+        `Toplam: ${gorevler.length} | Tamamlanan: ${tamamlanan} | Bekleyen: ${bekleyen}`;
+    }
+
+    function gorevTamamla(sira) {
+      const gorevler = gorevleriGetir();
+      gorevler[sira].tamamlandi = !gorevler[sira].tamamlandi;
+      gorevleriKaydet(gorevler);
+      listeyiGoster(seciliFiltre);
+    }
+
+    function listeyiGoster(filtre) {
+      seciliFiltre = filtre;
+      const gorevler = gorevleriGetir();
+      const liste = document.getElementById("gorevListesi");
+      liste.innerHTML = "";
+
+      for (let i = 0; i < gorevler.length; i++) {
+        const gorev = gorevler[i];
+
+        if (filtre === "hepsi" || gorev.oncelik === filtre) {
+          const satir = document.createElement("li");
+          const isaret = gorev.tamamlandi ? "✅ " : "⬜ ";
+          satir.textContent = isaret + gorev.baslik + " (" + gorev.oncelik + ")";
+          satir.style.cursor = "pointer";
+          satir.addEventListener("click", function () {
+            gorevTamamla(i);
+          });
+          liste.appendChild(satir);
+        }
+      }
+
+      if (liste.children.length === 0) {
+        liste.innerHTML = "<li>Gösterilecek görev yok.</li>";
+      }
+
+      ozetiGoster();
+    }
+
+    listeyiGoster("hepsi");
+  </script>
+</body>
+</html>
