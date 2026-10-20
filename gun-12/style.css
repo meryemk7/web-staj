@@ -167,3 +167,14 @@ select:user-invalid {
 .alan:has(:user-invalid) .hata-mesaji {
   display: block;
 }
+#durumFiltresi {
+  width: 100px;
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff; 
+  color: #1e3a5f; 
+  border-color: #1e3a5f;
+}

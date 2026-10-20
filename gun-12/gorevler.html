@@ -14,6 +14,17 @@
 </nav>
   <h1>Görevlerim</h1><hr>
   <p id="bekleyenSayisi"></p>
+  <div class="filtreler">
+    <label for="aramaKutusu">Ara:</label>
+    <input type="search" id="aramaKutusu" placeholder="Görev başlığı yaz..."><br>
+
+    <label for="durumFiltresi">Durum:</label>
+    <select id="durumFiltresi">
+      <option value="tumu">Tümü</option>
+      <option value="bekleyen">Bekleyen</option>
+      <option value="tamamlanan">Tamamlanan</option>
+    </select>
+  </div>
   <ul id="gorevListesi"></ul>
 
   <script src="ortak.js"></script>
@@ -22,39 +33,64 @@
     const liste = document.getElementById("gorevListesi");
     const bekleyenAlani = document.getElementById("bekleyenSayisi");
 
+    const aramaKutusu = document.getElementById ("aramaKutusu");
+    const durumFiltresi = document.getElementById ("durumFiltresi");
+
     function listeyiGoster() {
       liste.innerHTML = "";
+      const aranan = aramaKutusu.value.trim().toLocaleLowerCase("tr");
+      const secilenDurum = durumFiltresi.value;
+      let gosterilenSayisi = 0;
 
       for (let i = 0; i < gorevler.length; i++) {
         const gorev = gorevler[i];
-        const satir = document.createElement("li");
-
-        const yazi = document.createElement("span");
-        const isaret = gorev.tamamlandi ? "✅ " : "⬜ ";
-        yazi.textContent = isaret + gorev.baslik + " (" + gorev.oncelik + ") ";
-        if (gorev.tamamlandi) {
-          yazi.style.textDecoration = "line-through";
+        const baslik = gorev.baslik.toLocaleLowerCase("tr");
+        const aramayaUyuyor = baslik.includes(aranan);
+        let durumaUyuyor = true;
+        if (secilenDurum === "bekleyen") {
+          durumaUyuyor = !gorev.tamamlandi;
+        } else if (secilenDurum === "tamamlanan") {
+          durumaUyuyor = gorev.tamamlandi;
         }
-        const durumButonu = document.createElement("button");
-        durumButonu.textContent = gorev.tamamlandi ? "Geri al" : "Tamamlandı";
-        durumButonu.addEventListener("click", function () {
-          durumDegistir(i);
-        });
-        const silButonu = document.createElement("button");
-        silButonu.textContent = "Sil";
-        silButonu.addEventListener("click", function () {
-          gorevSil(i);
-        });
-        satir.appendChild(yazi);
-        satir.appendChild(durumButonu);
-        satir.appendChild(silButonu);
-        liste.appendChild(satir);
+        if (aramayaUyuyor && durumaUyuyor) {
+          const satir = document.createElement("li");
+
+          const yazi = document.createElement("span");
+          const isaret = gorev.tamamlandi ? "✅ " : "⬜ ";
+          yazi.textContent = isaret + gorev.baslik + " (" + gorev.oncelik + ") ";
+          if (gorev.tamamlandi) {
+            yazi.style.textDecoration = "line-through";
+          }
+
+          const durumButonu = document.createElement("button");
+          durumButonu.textContent = gorev.tamamlandi ? "Geri al" : "Tamamlandı";
+          durumButonu.addEventListener("click", function () {
+            durumDegistir(i);
+          });
+
+          const silButonu = document.createElement("button");
+          silButonu.textContent = "Sil";
+          silButonu.addEventListener("click", function () {
+            gorevSil(i);
+          });
+
+          satir.appendChild(yazi);
+          satir.appendChild(durumButonu);
+          satir.appendChild(silButonu);
+          liste.appendChild(satir);
+
+          gosterilenSayisi++;
+        }
       }
       if (gorevler.length === 0) {
-        liste.innerHTML = "<li>Henüz görev yok.</li>";
+        liste.innerHTML = "<li>Henüz hiç görev yok. Görev Ekle sayfasından yeni bir görev ekleyebilirsin.</li>";
+      } else if (gosterilenSayisi === 0) {
+        liste.innerHTML = "<li>Eşleşen görev bulunamadı. Farklı bir kelime aramayı ya da durum filtresini \"Tümü\" yapmayı dene.</li>";
       }
-      bekleyenGoster ();
+
+      bekleyenGoster();
     }
+
     function gorevSil(sira) {
       gorevler.splice(sira, 1);
       gorevleriKaydet(gorevler);
@@ -74,6 +110,9 @@
       }
       bekleyenAlani.textContent = "Bekleyen görev sayısı: " + bekleyen;
     }
+
+aramaKutusu.addEventListener("input", listeyiGoster);
+durumFiltresi.addEventListener("change", listeyiGoster);
 
     listeyiGoster();
   </script>
