@@ -18,3 +18,7 @@ Form alanlarına kullanım notları eklenmiştir.
 
 ## Kontrol
 Sayfa bağlantılarını ve formun zorunlu alan uyarılarını dene.
+
+## React sürümü
+Güncel React + TypeScript sürümü `gun-14` klasöründedir.
+Çalıştırmak için: `cd gun-14`, `npm install`, `npm run dev`
