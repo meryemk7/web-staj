@@ -1,0 +1,92 @@
+:root {
+  --metin: #111827;
+  --arka-plan: #f0ffff;
+  --ana-renk: #1e3a5f;
+  --kenarlik: #6b7280;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color-scheme: light;
+  color: var(--metin);
+  background: var(--arka-plan);
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.kart {
+  background-color: lightgray;
+  list-style: none;
+  border: 2px solid var(--kenarlik);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 480px;
+
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 16px;
+  max-width: 480px;
+}
+
+.filtreler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.form label,
+.filtreler label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 600;
+}
+
+input, select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  font: inherit;
+  background-color: white;
+  border-radius: 4px;
+  border: 2px solid var(--kenarlik);
+}
+
+button {
+  min-height: 44px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: white;
+  background-color: var(--ana-renk);
+  border: 2px solid var(--ana-renk);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2b5282;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}

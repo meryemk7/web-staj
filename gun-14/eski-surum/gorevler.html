@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Görevlerim</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+  <a href="index.html">Tanıtım</a>
+  <a href="gorevler.html">Görevler</a>
+  <a href="gorev-ekle.html">Görev Ekle</a>
+</nav>
+  <h1>Görevlerim</h1><hr>
+  <p id="bekleyenSayisi"></p>
+  <div class="filtreler">
+    <label for="aramaKutusu">Ara:</label>
+    <input type="search" id="aramaKutusu" placeholder="Görev başlığı yaz..."><br>
+
+    <label for="durumFiltresi">Durum:</label>
+    <select id="durumFiltresi">
+      <option value="tumu">Tümü</option>
+      <option value="bekleyen">Bekleyen</option>
+      <option value="tamamlanan">Tamamlanan</option>
+    </select>
+  </div>
+  <p id="mesaj"></p>
+<button id="yenidenDene" hidden>Yeniden dene</button>
+  <ul id="gorevListesi"></ul>
+
+  <script src="ortak.js"></script>
+  <script>
+    let gorevler = gorevleriGetir();
+    const liste = document.getElementById("gorevListesi");
+    const bekleyenAlani = document.getElementById("bekleyenSayisi");
+
+    const aramaKutusu = document.getElementById ("aramaKutusu");
+    const durumFiltresi = document.getElementById ("durumFiltresi");
+
+    function listeyiGoster() {
+      liste.innerHTML = "";
+      const aranan = aramaKutusu.value.trim().toLocaleLowerCase("tr");
+      const secilenDurum = durumFiltresi.value;
+      let gosterilenSayisi = 0;
+
+      for (let i = 0; i < gorevler.length; i++) {
+        const gorev = gorevler[i];
+        const baslik = gorev.baslik.toLocaleLowerCase("tr");
+        const aramayaUyuyor = baslik.includes(aranan);
+        let durumaUyuyor = true;
+        if (secilenDurum === "bekleyen") {
+          durumaUyuyor = !gorev.tamamlandi;
+        } else if (secilenDurum === "tamamlanan") {
+          durumaUyuyor = gorev.tamamlandi;
+        }
+        if (aramayaUyuyor && durumaUyuyor) {
+          const satir = document.createElement("li");
+
+          const yazi = document.createElement("span");
+          const isaret = gorev.tamamlandi ? "✅ " : "⬜ ";
+          yazi.textContent = isaret + gorev.baslik + " (" + gorev.oncelik + ") ";
+          if (gorev.tamamlandi) {
+            yazi.style.textDecoration = "line-through";
+          }
+
+          const durumButonu = document.createElement("button");
+          durumButonu.textContent = gorev.tamamlandi ? "Geri al" : "Tamamlandı";
+          durumButonu.addEventListener("click", function () {
+            durumDegistir(i);
+          });
+
+          const silButonu = document.createElement("button");
+          silButonu.textContent = "Sil";
+          silButonu.addEventListener("click", function () {
+            gorevSil(i);
+          });
+
+          satir.appendChild(yazi);
+          satir.appendChild(durumButonu);
+          satir.appendChild(silButonu);
+          liste.appendChild(satir);
+
+          gosterilenSayisi++;
+        }
+      }
+      if (gorevler.length === 0) {
+        liste.innerHTML = "<li>Henüz hiç görev yok. Görev Ekle sayfasından yeni bir görev ekleyebilirsin.</li>";
+      } else if (gosterilenSayisi === 0) {
+        liste.innerHTML = "<li>Eşleşen görev bulunamadı. Farklı bir kelime aramayı ya da durum filtresini \"Tümü\" yapmayı dene.</li>";
+      }
+
+      bekleyenGoster();
+    }
+
+    function gorevSil(sira) {
+      gorevler.splice(sira, 1);
+      gorevleriKaydet(gorevler);
+      listeyiGoster();
+    }
+    function durumDegistir(sira) {
+      gorevler[sira].tamamlandi = !gorevler[sira].tamamlandi;
+      gorevleriKaydet(gorevler);
+      listeyiGoster();
+    }
+    function bekleyenGoster () {
+      let bekleyen = 0;
+      for (const gorev of gorevler) {
+        if (!gorev.tamamlandi) {
+          bekleyen++;
+        }
+      }
+      bekleyenAlani.textContent = "Bekleyen görev sayısı: " + bekleyen;
+    }
+
+aramaKutusu.addEventListener("input", listeyiGoster);
+durumFiltresi.addEventListener("change", listeyiGoster);
+
+        const mesajEl = document.getElementById("mesaj");
+        const yenidenDeneButonu = document.getElementById("yenidenDene");
+
+    async function sayfayiYukle() {
+      mesajEl.textContent = "";
+      yenidenDeneButonu.hidden = true;
+
+      if (localStorage.getItem("gorevler") === null) {
+        mesajEl.textContent = "Görevler yükleniyor...";
+
+        try {
+          const apiGorevleri = await gorevleriApidenGetir();
+
+          gorevler = apiGorevleri.slice(0, 10).map(g => ({
+          baslik: g.title,
+          tamamlandi: g.completed,
+          oncelik: "Orta"
+        }));
+
+          gorevleriKaydet(gorevler);
+          mesajEl.textContent = "";
+
+        } catch (hata) {
+          mesajEl.textContent = "Görevler yüklenemedi. İnternet bağlantını kontrol edip tekrar dene.";
+          yenidenDeneButonu.hidden = false;
+          return;
+        }
+      }
+
+      listeyiGoster();
+    }
+
+    yenidenDeneButonu.addEventListener("click", sayfayiYukle);
+
+    sayfayiYukle();  
+  </script>
+</body>
+</html>
