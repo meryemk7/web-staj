@@ -1,13 +1,13 @@
+import type { Dispatch, SetStateAction } from "react";
 import type { Gorev } from "../types";
 import GorevKarti from "./GorevKarti";
 
 interface Props {
   gorevler: Gorev[];
-  durumDegistir: (id: number) => void;
-  gorevSil: (id: number) => void;
+  setGorevler: Dispatch<SetStateAction<Gorev[]>>;
 }
 
-export default function GorevListesi({ gorevler, durumDegistir, gorevSil }: Props) {
+export default function GorevListesi({ gorevler, setGorevler }: Props) {
   if (gorevler.length === 0) {
     return <p>Gösterilecek görev yok.</p>;
   }
@@ -15,12 +15,7 @@ export default function GorevListesi({ gorevler, durumDegistir, gorevSil }: Prop
   return (
     <ul>
       {gorevler.map((gorev) => (
-        <GorevKarti
-          key={gorev.id}
-          gorev={gorev}
-          durumDegistir={durumDegistir}
-          gorevSil={gorevSil}
-        />
+        <GorevKarti key={gorev.id} gorev={gorev} setGorevler={setGorevler} />
       ))}
     </ul>
   );

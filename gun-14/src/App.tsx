@@ -17,19 +17,6 @@ export default function App() {
     localStorage.setItem("gorevler", JSON.stringify(gorevler));
   }, [gorevler]);
 
-  // 🛠️ FONKSİYONLAR
-  function gorevEkle(baslik: string, oncelik: string) {
-    setGorevler([...gorevler, { id: Date.now(), baslik, oncelik, tamamlandi: false }]);
-  }
-
-  function durumDegistir(id: number) {
-    setGorevler(gorevler.map((g) => (g.id === id ? { ...g, tamamlandi: !g.tamamlandi } : g)));
-  }
-
-  function gorevSil(id: number) {
-    setGorevler(gorevler.filter((g) => g.id !== id));
-  }
-
   // 🔍 FİLTRELEME
   const aranan = arama.trim().toLocaleLowerCase("tr");
   const gosterilecekler = gorevler.filter((g) => {
@@ -45,10 +32,10 @@ export default function App() {
   return (
     <main>
       <h1>Görevlerim</h1>
-      <GorevFormu gorevEkle={gorevEkle} />
+      <GorevFormu setGorevler={setGorevler} />
       <p>Bekleyen görev sayısı: {bekleyenSayisi}</p>
       <GorevFiltresi arama={arama} setArama={setArama} durum={durum} setDurum={setDurum} />
-      <GorevListesi gorevler={gosterilecekler} durumDegistir={durumDegistir} gorevSil={gorevSil} />
+      <GorevListesi gorevler={gosterilecekler} setGorevler={setGorevler} />
     </main>
   );
 }

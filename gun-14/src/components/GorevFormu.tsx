@@ -1,17 +1,21 @@
-import { useState, type SubmitEvent } from "react";
+import { useState, type Dispatch, type SetStateAction, type SubmitEvent } from "react";
+import type { Gorev } from "../types";
 
 interface Props {
-  gorevEkle: (baslik: string, oncelik: string) => void;
+  setGorevler: Dispatch<SetStateAction<Gorev[]>>;
 }
 
-export default function GorevFormu({ gorevEkle }: Props) {
+export default function GorevFormu({ setGorevler }: Props) {
   const [baslik, setBaslik] = useState("");
   const [oncelik, setOncelik] = useState("");
 
   function gonder(olay: SubmitEvent<HTMLFormElement>) {
     olay.preventDefault();
     if (baslik.trim().length < 3 || oncelik === "") return;
-    gorevEkle(baslik.trim(), oncelik);
+    setGorevler((onceki) => [
+      ...onceki,
+      { id: Date.now(), baslik: baslik.trim(), oncelik, tamamlandi: false },
+    ]);
     setBaslik("");
     setOncelik("");
   }
