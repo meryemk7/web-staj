@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Dispatch, SetStateAction } from "react";
 import type { Gorev } from "../types";
 
@@ -21,7 +22,7 @@ export default function GorevKarti({ gorev, setGorevler }: Props) {
     <li className="kart">
       <span style={{ textDecoration: gorev.tamamlandi ? "line-through" : "none" }}>
         {gorev.tamamlandi ? "✅ " : "⬜ "}
-        {gorev.baslik} ({gorev.oncelik})
+        <Link to={`/gorev/${gorev.id}`}>{gorev.baslik}</Link> ({gorev.oncelik})
       </span>
       <button onClick={durumDegistir}>
         {gorev.tamamlandi ? "Geri al" : "Tamamlandı"}
