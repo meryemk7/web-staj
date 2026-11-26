@@ -49,7 +49,12 @@ export default function ListeSayfasi({ gorevler, setGorevler }: Props) {
       <button onClick={ornekGorevleriYukle} disabled={yukleniyor}>
         {yukleniyor ? "Yükleniyor..." : "Örnek görevleri yükle"}
       </button>
-      {hata && <p>{hata}</p>}
+      {hata && (
+        <div>
+          <p>{hata}</p>
+          <button onClick={ornekGorevleriYukle}>Yeniden dene</button>
+        </div>
+      )}
       <p>Bekleyen görev sayısı: {bekleyenSayisi}</p>
       <GorevFiltresi arama={arama} setArama={setArama} durum={durum} setDurum={setDurum} />
       <GorevListesi gorevler={gosterilecekler} setGorevler={setGorevler} />
