@@ -19,6 +19,10 @@ Her görevin kendi detay sayfası vardır.
 
 Var olmayan bir görev numarası yazılırsa detay sayfasında "Görev bulunamadı" mesajı çıkar.
 
+## API
+Liste sayfasındaki "Örnek görevleri yükle" butonu, jsonplaceholder API'sinden 5 görev çeker.
+Bağlantı hatasında hata mesajı ve "Yeniden dene" butonu görünür.
+
 ## Dosya yapısı
 - `src/pages/ListeSayfasi.tsx`: görev listesi sayfası
 - `src/pages/DetaySayfasi.tsx`: görev detay sayfası
@@ -28,5 +32,6 @@ Var olmayan bir görev numarası yazılırsa detay sayfasında "Görev bulunamad
 - `src/components/GorevListesi.tsx`: görevleri listeler
 - `src/components/GorevKarti.tsx`: tek bir görevi gösterir, tamamlama ve silme işlemleri burada
 - `src/App.tsx`: görev verisini tutar ve sayfa yönlendirmesini yapar
+- `src/api.ts`: API'den görevleri çeken fonksiyon
 
 ## Çalıştırma
